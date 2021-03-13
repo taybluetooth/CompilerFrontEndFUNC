@@ -7,7 +7,8 @@
 #include "tokens.h"
 %}
 
-
+DIGIT [0-9]
+IDENT [a-zA-Z][A-Za-z0-9]*
 
 %%
 "method"        { return METHOD;}
@@ -27,6 +28,18 @@
 "VAR"           { return VAR;}
 "*"             { return STAR;}
 "/"             { return SLASH;}
+"("             { return LBRA;}
+")"             { return RBRA;}
+"<"             { return LT;}
+"<="            { return LTE;}
+"=="            { return EQ;}
+"!="            { return NEQ;}
+">"             { return GT;}
+">="            { return GTE;}
+{DIGIT}+        {return INT;}
+{IDENT}         {return ID;}
+<<EOF>>         {return EOF;}
+
 %%
 
 int yywrap() { return EOF; }
