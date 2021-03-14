@@ -12,6 +12,30 @@ IDENT [a-zA-Z][A-Za-z0-9]*
 
 %%
 "method"        { return METHOD;}
+"begin"         { return BEGIN;}
+"endmethod"     { return ENDMETHOD;}
+"vars"          { return VARS;}
+"return"        { return RETURN;}
+"read"          { return READ;}
+"write"         { return WRITE;}
+"if"            { return IF;}
+"then"          { return THEN;}
+"else"          { return ELSE;}
+"endif"         { return ENDIF;}
+"while"         { return WHILE;}
+"endwhile"      { return ENDWHILE;}
+"less"          { return LESS;}
+"lessEq"        { return LESSEQ;}
+"eq"            { return EQ;}
+"nEq"           { return NEQ;}
+","             { return COMMA;}
+";"             { return SEMI;}
+":="            { return ASSIGN;}
+"("             { return LBRA;}
+")"             { return RBRA;}
+{DIGIT}+        { return INT;}
+{IDENT}         { return ID;}
+<<EOF>>         { return EOF;}
 %%
 
 int yywrap() { return EOF; }
