@@ -153,9 +153,20 @@ void program()
    printf("Parser unimplemented!");
  }
 
- void bop()
+ void bop(int depth)
  {
-   printf("Parser unimplemented!");
+   rule("bop", depth);
+   switch(symb)
+   {
+     case LESS:
+     case LESSEQ:
+     case EQ:
+     case NEQ: yylex();
+               return;
+
+     default:
+      error("bop", "boolean operator expected\n")
+   }
  }
 
  void exps()
