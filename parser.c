@@ -65,6 +65,13 @@ void error(char * rule, char * message)
    exit(0);
 }
 
+void rule(char * name, int depth)
+{ int i;
+  for(i = 0; i < depth; i++)
+    printf(" ");
+    printf("%s\n",name);
+}
+
 
 
 
