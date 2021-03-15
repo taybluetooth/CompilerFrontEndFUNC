@@ -30,10 +30,29 @@ char * getSymb(int s)
    {
       case  ID: return "ID";
       case  INT: return "INT";
-      /**
-	   * add cases for more FUNC tokens here
-	   */
-      case EOF: return "EOF";
+      case  METHOD: return "METHOD";
+      case  BEGIN: return "BEGIN";
+      case  ENDMETHOD: return "ENDMETHOD";
+      case  VARS: return "VARS";
+      case  RETURN: return "RETURN";
+      case  READ: return "READ";
+      case  WRITE: return "WRITE";
+      case  IF: return "IF";
+      case  THEN: return "THEN";
+      case  ELSE: return "ELSE";
+      case  ENDIF: return "ENDIF";
+      case  WHILE: return "WHILE";
+      case  ENDWHILE: return "ENDWHILE";
+      case  LESS: return "LESS";
+      case  LESSEQ: return "LESSEQ";
+      case  EQ: return "EQ";
+      case  NEQ: return "NEQ";
+      case  COMMA: return "COMMA";
+      case  SEMI: return "SEMI";
+      case  ASSIGN: return "ASSIGN";
+      case  LBRA: return "LBRA";
+      case  RBRA: return "RBRA";
+      case  EOF: return "EOF";
       default:
          printf("bad symbol: %d",s);
          return NULL;
