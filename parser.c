@@ -155,7 +155,14 @@ void program()
 
  void cond()
  {
-   printf("Parser unimplemented!");
+   rule("cond", depth);
+   bop(depth+1);
+   if(symb != LBRA)
+    error("cond", "( expected\n")
+   yylex();
+   exps(depth+1);
+   if(symb != RBRA)
+    error("cond", ") expected\n")
  }
 
  void bop(int depth)
