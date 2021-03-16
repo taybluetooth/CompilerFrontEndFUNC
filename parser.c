@@ -150,7 +150,14 @@ void program()
 
  void while()
  {
-   printf("Parser unimplemented!");
+   rule("while", depth);
+   cond(depth+1);
+   if(symb != BEGIN)
+    error("while", "begin expected\n");
+   yylex();
+   statements(depth+1);
+   if(symb != ENDWHILE)
+    error("while", "endwhile expected\n");
  }
 
  void cond()
