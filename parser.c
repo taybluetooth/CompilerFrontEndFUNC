@@ -128,9 +128,24 @@ void program()
    printf("Parser unimplemented!");
  }
 
- void rw()
+ void rw(int depth)
  {
-   printf("Parser unimplemented!");
+   rule("rw", depth);
+   switch(symb)
+   {
+     case READ:
+      if(symb != ID)
+        error("rw", "identifier expected\n");
+      yylex();
+      return;
+     case WRITE:
+      yylex();
+      exp(depth+1);
+      return;
+
+     default:
+      error("rw", "read or write operator expected\n")
+   }
  }
 
  void assign(int depth)
