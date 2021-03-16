@@ -184,12 +184,16 @@ void program()
    rule("exp", depth)
    switch(symb)
    {
-     case ID: yylex();
-              exps(depth+1)
-              return;
+     case ID:
+      yylex();
+      if(symb == LBRA)
+        yylex();
+        exps(depth+1)
+      return;
+
      case INT:
-              yylex();
-              return;
+      yylex();
+      return;
 
      default:
       error("exp", "expression expected\n");
