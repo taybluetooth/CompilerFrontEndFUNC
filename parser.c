@@ -176,7 +176,11 @@ void program()
 
  void exps()
  {
-   printf("Parser unimplemented!");
+  rule("exps", depth);
+  exp(depth+1);
+  if(symb == COMMA)
+    yylex();
+    exps(depth+1);
  }
 
  void exp(int depth)
