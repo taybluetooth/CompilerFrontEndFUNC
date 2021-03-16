@@ -181,14 +181,30 @@ void program()
 
  void exp(int depth)
  {
-   rule("exp", depth)
+   rule("exp", depth);
    switch(symb)
    {
      case ID:
       yylex();
       if(symb == LBRA)
+      {
         yylex();
-        exps(depth+1)
+        exps(depth+1);
+      }
+      else
+      {
+        error("exp", "( expected\n");
+      }
+
+      if(symb ==  RBRA)
+      {
+        yylex();
+        return;
+      }
+      else
+      {
+        error("exp", ") expected\n");
+      }
       return;
 
      case INT:
