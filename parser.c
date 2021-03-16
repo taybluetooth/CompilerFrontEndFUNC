@@ -170,7 +170,7 @@ void program()
                return;
 
      default:
-      error("bop", "boolean operator expected\n")
+      error("bop", "boolean operator expected\n");
    }
  }
 
@@ -179,9 +179,21 @@ void program()
    printf("Parser unimplemented!");
  }
 
- void exp()
+ void exp(int depth)
  {
-   printf("Parser unimplemented!");
+   rule("exp", depth)
+   switch(symb)
+   {
+     case ID: yylex();
+              exps(depth+1)
+              return;
+     case INT:
+              yylex();
+              return;
+
+     default:
+      error("exp", "expression expected\n");
+   }
  }
 
 
