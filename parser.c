@@ -133,9 +133,14 @@ void program()
    printf("Parser unimplemented!");
  }
 
- void assign()
+ void assign(int depth)
  {
-   printf("Parser unimplemented!");
+   rule("assign", depth);
+   yylex();
+   if(symb != ASSIGN)
+    error("assign", ":= expected\n");
+   yylex();
+   expr(depth+1);
  }
 
  void if()
