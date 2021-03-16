@@ -145,7 +145,17 @@ void program()
 
  void if()
  {
-   printf("Parser unimplemented!");
+   rule("if", depth);
+   cond(depth+1);
+   if(symb != THEN)
+    error("if", "then expected\n");
+   yylex();
+   statements(depth+1);
+   if(symb == ELSE)
+    yylex();
+    statements(depth+1);
+   if(symb != ENDIF)
+    error("if", "endif expected\n");
  }
 
  void while()
