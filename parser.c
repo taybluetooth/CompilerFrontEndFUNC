@@ -143,7 +143,7 @@ void program()
    expr(depth+1);
  }
 
- void if()
+ void if(int depth)
  {
    rule("if", depth);
    cond(depth+1);
@@ -158,7 +158,7 @@ void program()
     error("if", "endif expected\n");
  }
 
- void while()
+ void while(int depth)
  {
    rule("while", depth);
    cond(depth+1);
@@ -170,7 +170,7 @@ void program()
     error("while", "endwhile expected\n");
  }
 
- void cond()
+ void cond(int depth)
  {
    rule("cond", depth);
    bop(depth+1);
@@ -198,7 +198,7 @@ void program()
    }
  }
 
- void exps()
+ void exps(int depth)
  {
   rule("exps", depth);
   exp(depth+1);
