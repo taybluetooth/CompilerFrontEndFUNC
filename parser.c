@@ -98,9 +98,15 @@ void program()
  *
  */
 
- void methods()
+ void methods(int depth)
  {
-   printf("Parser unimplemented!");
+   rule("methods", depth);
+   method(depth + 1);
+   if(symb != SEMI)
+    error("methods", "; expected\n");
+
+   if(symb == METHOD)
+    methods(depth+1);
  }
 
  void method(int depth)
