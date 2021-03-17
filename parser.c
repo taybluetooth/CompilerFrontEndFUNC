@@ -81,22 +81,11 @@ void rule(char * name, int depth)
 /**
  *  This is where parser execution begins: it's the method for parsing programs.
  */
-void program()
+void program(int depth)
 {
-	/*
-	 * YOUR CODE HERE
-    * Remove the following line of code when done.
-	 */
-
-   printf("Parser unimplemented!");
+  rule("program", depth);
+  methods(depth+1);
 }
-
-/**
- *
- * YOUR CODE HERE
- * Add methods corresponding to the Non-terminals in the FUNC grammar below here
- *
- */
 
  void methods(int depth)
  {
