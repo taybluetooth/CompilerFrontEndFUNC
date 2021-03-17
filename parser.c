@@ -70,6 +70,9 @@ void error(char * rule, char * message)
 /**
  *  This is where parser execution begins: it's the method for parsing programs.
  */
+
+void methods();
+
 void program()
 {
   methods();
