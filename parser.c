@@ -212,7 +212,6 @@ void program()
 
  void ifCond()
  {
-   rule("if", depth);
    cond();
    if(symb != THEN)
     error("if", "then expected\n");
