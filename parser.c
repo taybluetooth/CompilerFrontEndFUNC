@@ -14,7 +14,7 @@
 // global variables
 
 int symb;
-extern int yylex(void);
+extern int lex(void);
 extern char *yytext;
 extern FILE *yyin;
 
@@ -57,6 +57,11 @@ char * getSymb(int s)
          printf("bad symbol: %d",s);
          return NULL;
    }
+}
+
+lex()
+{ printSymb();
+  symb = yylex();
 }
 
 void error(char * rule, char * message)
@@ -112,10 +117,10 @@ void program()
     error("method", ") expected\n");
 
    if(symb == ID)
-    yylex();
+    lex();
     args();
    if(symb == VARS)
-    yylex();
+    lex();
     args();
 
    if(symb != BEGIN)
@@ -127,13 +132,13 @@ void program()
       case IF:
       case WHILE:
       case READ:
-      case WRITE: yylex();
+      case WRITE: lex();
                   statements();
                   return;
     }
 
     if(symb == RETURN)
-      yylex();
+      lex();
       if(symb != ID)
         error("method", "expected identifier\n");
 
@@ -144,7 +149,7 @@ void program()
 
  void args()
  {
-   yylex();
+   lex();
    if(symb != ID)
     error("args", "identifier expected\n");
 
@@ -164,7 +169,7 @@ void program()
      case IF:
      case WHILE:
      case READ:
-     case WRITE: yylex();
+     case WRITE: lex();
                  statements();
                  return;
    }
@@ -175,21 +180,21 @@ void program()
    switch(symb)
    {
      case ASSIGN:
-      yylex();
+      lex();
       assign();
       return;
      case IF:
-      yylex();
+      lex();
       ifCond();
       return;
      case WHILE:
-      yylex();
+      lex();
       whileCond();
       return;
      case READ:
      case WRITE:
                  rw();
-                 yylex();
+                 lex();
                  return;
 
      default:
@@ -204,10 +209,10 @@ void program()
      case READ:
       if(symb != ID)
         error("rw", "identifier expected\n");
-      yylex();
+      lex();
       return;
      case WRITE:
-      yylex();
+      lex();
       expression();
       return;
 
@@ -218,10 +223,10 @@ void program()
 
  void assign()
  {
-   yylex();
+   lex();
    if(symb != ASSIGN)
     error("assign", ":= expected\n");
-   yylex();
+   lex();
    expression();
  }
 
@@ -230,10 +235,10 @@ void program()
    cond();
    if(symb != THEN)
     error("if", "then expected\n");
-   yylex();
+   lex();
    statements();
    if(symb == ELSE)
-    yylex();
+    lex();
     statements();
    if(symb != ENDIF)
     error("if", "endif expected\n");
@@ -244,7 +249,7 @@ void program()
    cond();
    if(symb != BEGIN)
     error("while", "begin expected\n");
-   yylex();
+   lex();
    statements();
    if(symb != ENDWHILE)
     error("while", "endwhile expected\n");
@@ -255,7 +260,7 @@ void program()
    bop();
    if(symb != LBRA)
     error("cond", "( expected\n");
-   yylex();
+   lex();
    exps();
    if(symb != RBRA)
     error("cond", ") expected\n");
@@ -268,7 +273,7 @@ void program()
      case LESS:
      case LESSEQ:
      case EQ:
-     case NEQ: yylex();
+     case NEQ: lex();
                return;
 
      default:
@@ -280,7 +285,7 @@ void program()
  {
   expression();
   if(symb == COMMA)
-    yylex();
+    lex();
     exps();
  }
 
@@ -289,10 +294,10 @@ void program()
    switch(symb)
    {
      case ID:
-      yylex();
+      lex();
       if(symb == LBRA)
       {
-        yylex();
+        lex();
         exps();
       }
       else
@@ -302,7 +307,7 @@ void program()
 
       if(symb ==  RBRA)
       {
-        yylex();
+        lex();
         return;
       }
       else
@@ -312,7 +317,7 @@ void program()
       return;
 
      case INT:
-      yylex();
+      lex();
       return;
 
      default:
