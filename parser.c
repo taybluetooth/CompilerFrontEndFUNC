@@ -103,11 +103,6 @@ void program()
    printf("Parser unimplemented!");
  }
 
- void methods()
- {
-   printf("Parser unimplemented!");
- }
-
  void method()
  {
    printf("Parser unimplemented!");
@@ -123,9 +118,30 @@ void program()
    printf("Parser unimplemented!");
  }
 
- void statement()
+ void statement(int depth)
  {
-   printf("Parser unimplemented!");
+   rule("statement", depth);
+   switch(symb)
+   {
+     case ASSIGN:
+      yylex();
+      assign(depth+1);
+      return;
+     case IF:
+      yylex();
+      ifCond(depth+1);
+      return;
+     case WHILE:
+      yylex();
+      whileCond(depth+1);
+      return;
+     case READ:
+     case WRITE: yylex();
+                 return;
+
+     default:
+      error("statement", "statement expected\n")
+   }
  }
 
  void rw(int depth)
@@ -158,7 +174,7 @@ void program()
    expr(depth+1);
  }
 
- void if(int depth)
+ void ifCond(int depth)
  {
    rule("if", depth);
    cond(depth+1);
@@ -173,7 +189,7 @@ void program()
     error("if", "endif expected\n");
  }
 
- void while(int depth)
+ void whileCond(int depth)
  {
    rule("while", depth);
    cond(depth+1);
