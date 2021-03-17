@@ -195,7 +195,7 @@ void program(int depth)
                  return;
 
      default:
-      error("statement", "statement expected\n")
+      error("statement", "statement expected\n");
    }
  }
 
@@ -215,7 +215,7 @@ void program(int depth)
       return;
 
      default:
-      error("rw", "read or write operator expected\n")
+      error("rw", "read or write operator expected\n");
    }
  }
 
@@ -261,11 +261,11 @@ void program(int depth)
    rule("cond", depth);
    bop(depth+1);
    if(symb != LBRA)
-    error("cond", "( expected\n")
+    error("cond", "( expected\n");
    yylex();
    exps(depth+1);
    if(symb != RBRA)
-    error("cond", ") expected\n")
+    error("cond", ") expected\n");
  }
 
  void bop(int depth)
@@ -348,6 +348,6 @@ int main(int argc, char **argv)
 		exit(0);
 	}
 
-	program();
+	program(1);
 	fclose(yyin);
 }
