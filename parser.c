@@ -226,7 +226,7 @@ void program(int depth)
    if(symb != ASSIGN)
     error("assign", ":= expected\n");
    yylex();
-   expr(depth+1);
+   exp(depth+1);
  }
 
  void ifCond(int depth)
