@@ -72,6 +72,18 @@ void error(char * rule, char * message)
  */
 
 void methods();
+void method();
+void args();
+void statements();
+void statement();
+void rw();
+void assign();
+void ifCond();
+voif whileCond();
+void cond();
+void bop();
+void exps();
+void expression();
 
 void program()
 {

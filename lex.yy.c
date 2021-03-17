@@ -497,12 +497,12 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "func.lex"
+#line 1 "FUNC.lex"
 /*
  *This is where you specify the rules for your FUNC lexical analyser. Once you have completed
  * it, you will need to use FLEX to generate a lexical analyser from this file.
  */
-#line 7 "func.lex"
+#line 7 "FUNC.lex"
 #include "tokens.h"
 #line 508 "lex.yy.c"
 
@@ -686,7 +686,7 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 13 "func.lex"
+#line 13 "FUNC.lex"
 
 #line 692 "lex.yy.c"
 
@@ -773,131 +773,131 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 14 "func.lex"
+#line 14 "FUNC.lex"
 { return METHOD;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 15 "func.lex"
+#line 15 "FUNC.lex"
 { return BEGIN;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 16 "func.lex"
+#line 16 "FUNC.lex"
 { return ENDMETHOD;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 17 "func.lex"
+#line 17 "FUNC.lex"
 { return VARS;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 18 "func.lex"
+#line 18 "FUNC.lex"
 { return RETURN;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 19 "func.lex"
+#line 19 "FUNC.lex"
 { return READ;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 20 "func.lex"
+#line 20 "FUNC.lex"
 { return WRITE;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 21 "func.lex"
+#line 21 "FUNC.lex"
 { return IF;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 22 "func.lex"
+#line 22 "FUNC.lex"
 { return THEN;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 23 "func.lex"
+#line 23 "FUNC.lex"
 { return ELSE;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 24 "func.lex"
+#line 24 "FUNC.lex"
 { return ENDIF;}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 25 "func.lex"
+#line 25 "FUNC.lex"
 { return WHILE;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 26 "func.lex"
+#line 26 "FUNC.lex"
 { return ENDWHILE;}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 27 "func.lex"
+#line 27 "FUNC.lex"
 { return LESS;}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 28 "func.lex"
+#line 28 "FUNC.lex"
 { return LESSEQ;}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 29 "func.lex"
+#line 29 "FUNC.lex"
 { return EQ;}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 30 "func.lex"
+#line 30 "FUNC.lex"
 { return NEQ;}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 31 "func.lex"
+#line 31 "FUNC.lex"
 { return COMMA;}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 32 "func.lex"
+#line 32 "FUNC.lex"
 { return SEMI;}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 33 "func.lex"
+#line 33 "FUNC.lex"
 { return ASSIGN;}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 34 "func.lex"
+#line 34 "FUNC.lex"
 { return LBRA;}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 35 "func.lex"
+#line 35 "FUNC.lex"
 { return RBRA;}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 36 "func.lex"
+#line 36 "FUNC.lex"
 { return INT;}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 37 "func.lex"
+#line 37 "FUNC.lex"
 { return ID;}
 	YY_BREAK
 case YY_STATE_EOF(INITIAL):
-#line 38 "func.lex"
+#line 38 "FUNC.lex"
 { return EOF;}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 39 "func.lex"
+#line 39 "FUNC.lex"
 ECHO;
 	YY_BREAK
 #line 904 "lex.yy.c"
@@ -1892,7 +1892,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 39 "func.lex"
+#line 39 "FUNC.lex"
 
 
 
