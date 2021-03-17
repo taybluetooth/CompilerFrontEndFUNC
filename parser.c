@@ -60,7 +60,7 @@ char * getSymb(int s)
 }
 
 lex()
-{ printSymb();
+{
   symb = yylex();
 }
 
