@@ -79,7 +79,7 @@ void statement();
 void rw();
 void assign();
 void ifCond();
-voif whileCond();
+void whileCond();
 void cond();
 void bop();
 void exps();
