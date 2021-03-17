@@ -108,9 +108,15 @@ void program()
    printf("Parser unimplemented!");
  }
 
- void args()
+ void args(int depth)
  {
-   printf("Parser unimplemented!");
+   rule("args", depth);
+   yylex();
+   if(symb != ID)
+    error("args", "identifier expected\n");
+
+   if(symb == COMMA)
+    args(depth+1);
  }
 
  void statements(int depth)
