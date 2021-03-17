@@ -193,7 +193,7 @@ void program()
       return;
      case WRITE:
       yylex();
-      exp();
+      expression();
       return;
 
      default:
@@ -207,7 +207,7 @@ void program()
    if(symb != ASSIGN)
     error("assign", ":= expected\n");
    yylex();
-   exp();
+   expression();
  }
 
  void ifCond()
@@ -264,13 +264,13 @@ void program()
 
  void exps()
  {
-  exp();
+  expression();
   if(symb == COMMA)
     yylex();
     exps();
  }
 
- void exp()
+ void expression()
  {
    switch(symb)
    {
@@ -283,7 +283,7 @@ void program()
       }
       else
       {
-        error("exp", "( expected\n");
+        error("expression", "( expected\n");
       }
 
       if(symb ==  RBRA)
@@ -293,7 +293,7 @@ void program()
       }
       else
       {
-        error("exp", ") expected\n");
+        error("expression", ") expected\n");
       }
       return;
 
@@ -302,7 +302,7 @@ void program()
       return;
 
      default:
-      error("exp", "expression expected\n");
+      error("expression", "expression expected\n");
    }
  }
 
