@@ -65,42 +65,28 @@ void error(char * rule, char * message)
    exit(0);
 }
 
-void rule(char * name, int depth)
-{ int i;
-  for(i = 0; i < depth; i++)
-    printf(" ");
-    printf("%s\n",name);
-}
-
-
-
-
-
 //-------------YOUR CODE BELOW THIS LINE----------------------//
 
 /**
  *  This is where parser execution begins: it's the method for parsing programs.
  */
-void program(int depth)
+void program()
 {
-  rule("program", depth);
-  methods(depth+1);
+  methods();
 }
 
- void methods(int depth)
+ void methods()
  {
-   rule("methods", depth);
-   method(depth + 1);
+   method();
    if(symb != SEMI)
     error("methods", "; expected\n");
 
    if(symb == METHOD)
-    methods(depth+1);
+    methods();
  }
 
- void method(int depth)
+ void method()
  {
-   rule("method", depth);
    if(symb != METHOD)
     error("method", "method expected\n");
    if(symb != ID)
@@ -112,10 +98,10 @@ void program(int depth)
 
    if(symb == ID)
     yylex();
-    args(depth+1);
+    args();
    if(symb == VARS)
     yylex();
-    args(depth+1);
+    args();
 
    if(symb != BEGIN)
     error("method", "begin expected\n");
@@ -127,7 +113,7 @@ void program(int depth)
       case WHILE:
       case READ:
       case WRITE: yylex();
-                  statements(depth+1);
+                  statements();
                   return;
     }
 
@@ -141,21 +127,19 @@ void program(int depth)
 
  }
 
- void args(int depth)
+ void args()
  {
-   rule("args", depth);
    yylex();
    if(symb != ID)
     error("args", "identifier expected\n");
 
    if(symb == COMMA)
-    args(depth+1);
+    args();
  }
 
- void statements(int depth)
+ void statements()
  {
-   rule("statements", depth);
-   statement(depth+1);
+   statement();
    if(symb != SEMI)
     error("statements", "; expected\n");
 
@@ -166,31 +150,30 @@ void program(int depth)
      case WHILE:
      case READ:
      case WRITE: yylex();
-                 statements(depth+1);
+                 statements();
                  return;
    }
  }
 
- void statement(int depth)
+ void statement()
  {
-   rule("statement", depth);
    switch(symb)
    {
      case ASSIGN:
       yylex();
-      assign(depth+1);
+      assign();
       return;
      case IF:
       yylex();
-      ifCond(depth+1);
+      ifCond();
       return;
      case WHILE:
       yylex();
-      whileCond(depth+1);
+      whileCond();
       return;
      case READ:
      case WRITE:
-                 rw(depth+1);
+                 rw();
                  yylex();
                  return;
 
@@ -199,9 +182,8 @@ void program(int depth)
    }
  }
 
- void rw(int depth)
+ void rw()
  {
-   rule("rw", depth);
    switch(symb)
    {
      case READ:
@@ -211,7 +193,7 @@ void program(int depth)
       return;
      case WRITE:
       yylex();
-      exp(depth+1);
+      exp();
       return;
 
      default:
@@ -219,58 +201,54 @@ void program(int depth)
    }
  }
 
- void assign(int depth)
+ void assign()
  {
-   rule("assign", depth);
    yylex();
    if(symb != ASSIGN)
     error("assign", ":= expected\n");
    yylex();
-   exp(depth+1);
+   exp();
  }
 
- void ifCond(int depth)
+ void ifCond()
  {
    rule("if", depth);
-   cond(depth+1);
+   cond();
    if(symb != THEN)
     error("if", "then expected\n");
    yylex();
-   statements(depth+1);
+   statements();
    if(symb == ELSE)
     yylex();
-    statements(depth+1);
+    statements();
    if(symb != ENDIF)
     error("if", "endif expected\n");
  }
 
- void whileCond(int depth)
+ void whileCond()
  {
-   rule("while", depth);
-   cond(depth+1);
+   cond();
    if(symb != BEGIN)
     error("while", "begin expected\n");
    yylex();
-   statements(depth+1);
+   statements();
    if(symb != ENDWHILE)
     error("while", "endwhile expected\n");
  }
 
- void cond(int depth)
+ void cond()
  {
-   rule("cond", depth);
-   bop(depth+1);
+   bop();
    if(symb != LBRA)
     error("cond", "( expected\n");
    yylex();
-   exps(depth+1);
+   exps();
    if(symb != RBRA)
     error("cond", ") expected\n");
  }
 
- void bop(int depth)
+ void bop()
  {
-   rule("bop", depth);
    switch(symb)
    {
      case LESS:
@@ -284,18 +262,16 @@ void program(int depth)
    }
  }
 
- void exps(int depth)
+ void exps()
  {
-  rule("exps", depth);
-  exp(depth+1);
+  exp();
   if(symb == COMMA)
     yylex();
-    exps(depth+1);
+    exps();
  }
 
- void exp(int depth)
+ void exp()
  {
-   rule("exp", depth);
    switch(symb)
    {
      case ID:
@@ -303,7 +279,7 @@ void program(int depth)
       if(symb == LBRA)
       {
         yylex();
-        exps(depth+1);
+        exps();
       }
       else
       {
