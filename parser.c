@@ -342,7 +342,7 @@ int main(int argc, char **argv)
 		printf("can't open %s\n", argv[1]);
 		exit(0);
 	}
-
+  lex();
 	program(1);
 	fclose(yyin);
 }
