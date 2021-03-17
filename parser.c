@@ -113,9 +113,23 @@ void program()
    printf("Parser unimplemented!");
  }
 
- void statements()
+ void statements(int depth)
  {
-   printf("Parser unimplemented!");
+   rule("statements", depth);
+   statement(depth+1);
+   if(symb != SEMI)
+    error("statements", "; expected\n");
+
+   switch(symb)
+   {
+     case ASSIGN:
+     case IF:
+     case WHILE:
+     case READ:
+     case WRITE: yylex();
+                 statements(depth+1);
+                 return;
+   }
  }
 
  void statement(int depth)
@@ -136,7 +150,9 @@ void program()
       whileCond(depth+1);
       return;
      case READ:
-     case WRITE: yylex();
+     case WRITE:
+                 rw(depth+1);
+                 yylex();
                  return;
 
      default:
