@@ -103,9 +103,47 @@ void program()
    printf("Parser unimplemented!");
  }
 
- void method()
+ void method(int depth)
  {
-   printf("Parser unimplemented!");
+   rule("method", depth);
+   if(symb != METHOD)
+    error("method", "method expected\n");
+   if(symb != ID)
+    error("method", "identifier expected\n");
+   if(symb != LBRA)
+    error("method", "( expected\n");
+   if(symb != RBRA)
+    error("method", ") expected\n");
+
+   if(symb == ID)
+    yylex();
+    args(depth+1);
+   if(symb == VARS)
+    yylex();
+    args(depth+1);
+
+   if(symb != BEGIN)
+    error("method", "begin expected\n");
+
+    switch(symb)
+    {
+      case ASSIGN:
+      case IF:
+      case WHILE:
+      case READ:
+      case WRITE: yylex();
+                  statements(depth+1);
+                  return;
+    }
+
+    if(symb == RETURN)
+      yylex();
+      if(symb != ID)
+        error("method", "expected identifier\n");
+
+    if(symb != ENDMETHOD)
+      error("method", "endmethod expected\n");
+
  }
 
  void args(int depth)
