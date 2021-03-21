@@ -95,66 +95,79 @@ void program()
   methods();
 }
 
- void methods()
- {
-   method();
-   if(symb != SEMI)
+void methods()
+{
+  method();
+  if(symb != SEMI)
     error("methods", "; expected\n");
+  lex();
 
-   if(symb == METHOD)
+  if(symb == METHOD)
     methods();
- }
+}
 
- void method()
- {
-   if(symb != METHOD)
+void method()
+{
+  if(symb != METHOD)
     error("method", "method expected\n");
-   if(symb != ID)
+  lex();
+  if(symb != ID)
     error("method", "identifier expected\n");
-   if(symb != LBRA)
+  lex();
+  if(symb != LBRA)
     error("method", "( expected\n");
-   if(symb != RBRA)
+  lex();
+
+  if(symb == ID) {
+    args();
+  }
+
+  if(symb != RBRA)
     error("method", ") expected\n");
+  lex();
 
-   if(symb == ID)
+  if(symb == VARS) {
     lex();
     args();
-   if(symb == VARS)
-    lex();
-    args();
+  }
 
-   if(symb != BEGIN)
+  if(symb != BEGIN)
     error("method", "begin expected\n");
+  lex();
 
-    switch(symb)
-    {
-      case ASSIGN:
-      case IF:
-      case WHILE:
-      case READ:
-      case WRITE: lex();
-                  statements();
-                  return;
-    }
+  switch(symb)
+  {
+    case ID:
+    case IF:
+    case WHILE:
+    case READ:
+    case WRITE: statements();//
+                break;
+  }
 
-    if(symb == RETURN)
-      lex();
-      if(symb != ID)
-        error("method", "expected identifier\n");
+  if(symb == RETURN) {
+    lex();
+    if(symb != ID) error("method", "identifier expected\n");
+    lex();
+    if(symb != SEMI) error("method", "semi expected\n");
+    lex();
+  }
 
-    if(symb != ENDMETHOD)
-      error("method", "endmethod expected\n");
-
- }
+  if(symb != ENDMETHOD)
+    error("method", "endmethod expected\n");
+  lex();
+}
 
  void args()
  {
-   lex();
-   if(symb != ID)
+  if(symb != ID)
     error("args", "identifier expected\n");
+  lex();
 
-   if(symb == COMMA)
+  if(symb == COMMA) {
+    lex();
     args();
+  }
  }
 
  void statements()
@@ -162,16 +175,17 @@ void program()
    statement();
    if(symb != SEMI)
     error("statements", "; expected\n");
+   lex();
 
    switch(symb)
    {
-     case ASSIGN:
+     case ID:
      case IF:
      case WHILE:
      case READ:
-     case WRITE: lex();
+     case WRITE:
                  statements();
-                 return;
+                 break;
    }
  }
 
@@ -179,23 +193,21 @@ void program()
  {
    switch(symb)
    {
-     case ASSIGN:
-      lex();
+     case ID:
       assign();
-      return;
+      break;
      case IF:
       lex();
       ifCond();
-      return;
+      break;
      case WHILE:
       lex();
       whileCond();
-      return;
+      break;
      case READ:
      case WRITE:
                  rw();
-                 lex();
-                 return;
+                 break;
 
      default:
       error("statement", "statement expected\n");
@@ -204,25 +216,22 @@ void program()
 
  void rw()
  {
-   switch(symb)
-   {
-     case READ:
-      if(symb != ID)
-        error("rw", "identifier expected\n");
-      lex();
-      return;
-     case WRITE:
-      lex();
-      expression();
-      return;
-
-     default:
-      error("rw", "read or write operator expected\n");
+   if(symb == READ) {
+     lex();
+     if(symb != ID) error("rw", "identifier expected\n");
+     lex();
    }
+   else if(symb == WRITE) {
+     lex();
+     expression();
+   }
+   else error("rw", "expected READ or WRITE\n");
  }
 
  void assign()
  {
+   if(symb != ID)
+    error("assign", "identifier expected\n");
    lex();
    if(symb != ASSIGN)
     error("assign", ":= expected\n");
@@ -237,11 +246,13 @@ void program()
     error("if", "then expected\n");
    lex();
    statements();
-   if(symb == ELSE)
+   if(symb == ELSE) {
     lex();
     statements();
+   }
    if(symb != ENDIF)
     error("if", "endif expected\n");
+   lex();
  }
 
  void whileCond()
@@ -253,6 +264,7 @@ void program()
    statements();
    if(symb != ENDWHILE)
     error("while", "endwhile expected\n");
+   lex();
  }
 
  void cond()
@@ -264,6 +276,7 @@ void program()
    exps();
    if(symb != RBRA)
     error("cond", ") expected\n");
+   lex();
  }
 
  void bop()
@@ -274,7 +287,7 @@ void program()
      case LESSEQ:
      case EQ:
      case NEQ: lex();
-               return;
+               break;
 
      default:
       error("bop", "boolean operator expected\n");
@@ -284,45 +297,25 @@ void program()
  void exps()
  {
   expression();
-  if(symb == COMMA)
+  if(symb == COMMA) {
     lex();
     exps();
+  }
  }
 
  void expression()
  {
-   switch(symb)
-   {
-     case ID:
-      lex();
-      if(symb == LBRA)
-      {
-        lex();
-        exps();
-      }
-      else
-      {
-        error("expression", "( expected\n");
-      }
-
-      if(symb ==  RBRA)
-      {
-        lex();
-        return;
-      }
-      else
-      {
-        error("expression", ") expected\n");
-      }
-      return;
-
-     case INT:
-      lex();
-      return;
-
-     default:
-      error("expression", "expression expected\n");
-   }
+   if(symb == ID) {
+     lex();
+     if(symb == LBRA) {
+       lex();
+       exps();
+       if(symb != RBRA) error ("exp", ") expected\n");
+       lex();
+     }
+   } else if (symb == INT) {
+     lex();
+   } else error("exp", "identifier or integer expected\n");
  }
 
 
@@ -343,6 +336,6 @@ int main(int argc, char **argv)
 		exit(0);
 	}
   lex();
-	program(1);
+	program();
 	fclose(yyin);
 }
